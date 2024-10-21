@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 use Illuminate\Support\Facades\Config;
 
 class JWTService
@@ -34,8 +35,8 @@ class JWTService
     public function decodeToken($token)
     {
         try {
-            // Decode token using HS256 algorithm
-            return JWT::decode($token, $this->key, ['HS256']);
+            $decoded = JWT::decode($token, new Key($this->key, 'HS256'));
+            return $decoded;
         } catch (\Exception $e) {
             return null; // Return null if the token is invalid or expired
         }
