@@ -20,6 +20,17 @@ class EmployeeController extends Controller
             'tgl_lahir' => $request->tgl_lahir,
             'gaji' => $request->gaji,
         ]);
-        return response()->json(['id' => $nama], 201);
+        return response()->json(['id' => $id], 201);
+    }
+
+    public function destroy($id)
+    {
+        $deleted = DB::table('karyawan')->where('id', $id)->delete();
+
+        if ($deleted) {
+            return response()->json(['message' => 'Karyawan deleted successfully']);
+        }
+
+        return response()->json(['message' => 'Karyawan not found'], 404);
     }
 }

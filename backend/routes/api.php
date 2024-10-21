@@ -21,3 +21,4 @@ Route::get('/register', [AuthController::class, 'register']);
 Route::get('/login', [AuthController::class, 'login']);
 
 Route::post('karyawan', [EmployeeController::class, 'store']);
+Route::delete('karyawan/{id}', [EmployeeController::class, 'destroy']);
