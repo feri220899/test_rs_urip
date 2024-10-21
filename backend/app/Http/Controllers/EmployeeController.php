@@ -33,4 +33,20 @@ class EmployeeController extends Controller
 
         return response()->json(['message' => 'Karyawan not found'], 404);
     }
+
+    public function update(Request $request, $id)
+    {
+
+        $updated = DB::table('karyawan')->where('id', $id)->update([
+            'nama' => $request->nama,
+            'tgl_lahir' => $request->tgl_lahir,
+            'gaji' => $request->gaji,
+        ]);
+
+        if ($updated) {
+            return response()->json(['message' => 'Karyawan updated successfully']);
+        }
+
+        return response()->json(['message' => 'Karyawan not found'], 404);
+    }
 }

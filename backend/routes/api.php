@@ -22,3 +22,4 @@ Route::get('/login', [AuthController::class, 'login']);
 
 Route::post('karyawan', [EmployeeController::class, 'store']);
 Route::delete('karyawan/{id}', [EmployeeController::class, 'destroy']);
+Route::put('karyawan/{id}', [EmployeeController::class, 'update']);
