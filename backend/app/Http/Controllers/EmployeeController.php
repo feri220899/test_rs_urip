@@ -7,6 +7,12 @@ use Illuminate\Support\Facades\DB;
 
 class EmployeeController extends Controller
 {
+    public function index()
+    {
+        $karyawan = DB::table('karyawan')->get();
+        return response()->json($karyawan);
+    }
+
     public function store(Request $request)
     {
         $request->validate([
