@@ -18,14 +18,22 @@ class AuthController extends Controller
     }
     public function register(Request $request)
     {
-        $user = User::create([
+        $user = [
             'name' => 'admin',
             'email' => 'admin@gmail.com',
-            'password' => Hash::make('pass123'),
-        ]);
+        ];
         $token = $this->jwtService->createToken($user);
         dd($token);
         return response()->json(compact('user', 'token'), 201);
     }
 
+    public function login(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+        if ($token = JWTAuth::attempt($credentials)) {
+            return response()->json(['error' => 'Invalid Credentials'], 401);
+        }
+
+        return response()->json(compact('token'));
+    }
 }

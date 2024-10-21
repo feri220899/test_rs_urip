@@ -20,9 +20,9 @@ use App\Http\Controllers\EmployeeController;
 Route::get('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
-// Route::group(['middleware' => 'jwt'], function () {
+Route::group(['middleware' => 'jwt'], function () {
     Route::get('karyawan', [EmployeeController::class, 'index']);
     Route::post('karyawan', [EmployeeController::class, 'store']);
     Route::delete('karyawan/{id}', [EmployeeController::class, 'destroy']);
     Route::put('karyawan/{id}', [EmployeeController::class, 'update']);
-// });
+});

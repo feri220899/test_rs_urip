@@ -21,7 +21,7 @@ class JWTService
         // Mengatur payload (data yang disimpan di dalam token)
         $payload = [
             'iss' => "laravel-jwt", // Issuer (mengidentifikasi siapa yang membuat token)
-            'sub' => $user->id, // Subject (ID pengguna)
+            'sub' => $user['email'], // Subject (ID pengguna)
             'iat' => time(), // Waktu token diterbitkan
             'exp' => time() + 3600, // Waktu kadaluarsa (1 jam)
         ];
@@ -34,10 +34,11 @@ class JWTService
     public function decodeToken($token)
     {
         try {
-            // Decode token dan kembalikan data payload-nya
+            // Decode token using HS256 algorithm
             return JWT::decode($token, $this->key, ['HS256']);
         } catch (\Exception $e) {
-            return null; // Token tidak valid
+            return null; // Return null if the token is invalid or expired
         }
     }
+
 }
